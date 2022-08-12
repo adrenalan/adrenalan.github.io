@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html ⚡>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <title>SIEM – How to go from concept to incident ready</title>
+
+    <meta name="description" content="So, you have decided your organisation needs a SIEM. What happens next?" />
+    <link rel="icon" href="adrenalan.github.io/content/images/size/w256h256/2022/08/Adrenalan-Fav-60px.png" type="image/png" />
+    <link rel="canonical" href="adrenalan.github.io/siem-how-to-go-from-concept-to-incident-ready/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    
+    <meta property="og:site_name" content="Adrenalan" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="SIEM – How to go from concept to incident ready" />
+    <meta property="og:description" content="So, you have decided your organisation needs a SIEM. What happens next?" />
+    <meta property="og:url" content="adrenalan.github.io/siem-how-to-go-from-concept-to-incident-ready/" />
+    <meta property="og:image" content="adrenalan.github.io/content/images/2022/08/1-top-of-page.jpg" />
+    <meta property="article:published_time" content="2018-09-11T02:51:20.000Z" />
+    <meta property="article:modified_time" content="2022-08-12T03:10:43.000Z" />
+    <meta property="article:tag" content="siem" />
+    <meta property="article:tag" content="soc" />
+    <meta property="article:tag" content="security" />
+    <meta property="article:tag" content="secops" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SIEM – How to go from concept to incident ready" />
+    <meta name="twitter:description" content="So, you have decided your organisation needs a SIEM. What happens next?" />
+    <meta name="twitter:url" content="adrenalan.github.io/siem-how-to-go-from-concept-to-incident-ready/" />
+    <meta name="twitter:image" content="adrenalan.github.io/content/images/2022/08/1-top-of-page.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Mark Thompson" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="siem, soc, security, secops" />
+    <meta property="og:image:width" content="1598" />
+    <meta property="og:image:height" content="535" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Adrenalan",
+        "url": "adrenalan.github.io/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "adrenalan.github.io/content/images/size/w256h256/2022/08/Adrenalan-Fav-60px.png",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Mark Thompson",
+        "url": "adrenalan.github.io/author/mark/",
+        "sameAs": []
+    },
+    "headline": "SIEM – How to go from concept to incident ready",
+    "url": "adrenalan.github.io/siem-how-to-go-from-concept-to-incident-ready/",
+    "datePublished": "2018-09-11T02:51:20.000Z",
+    "dateModified": "2022-08-12T03:10:43.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "adrenalan.github.io/content/images/2022/08/1-top-of-page.jpg",
+        "width": 1598,
+        "height": 535
+    },
+    "keywords": "siem, soc, security, secops",
+    "description": "So, you have decided your organisation needs a SIEM. What happens next?",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "adrenalan.github.io/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 5.8" />
+    <link rel="alternate" type="application/rss+xml" title="Adrenalan" href="adrenalan.github.io/rss/" />
+
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: var(--ghost-accent-color, #1292EE);
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: var(--ghost-accent-color, #1292EE);
+    }
+
+    .post-content blockquote.kg-blockquote-alt {
+        font-size: 1.2em;
+        font-style: italic;
+        line-height: 1.6em;
+        text-align: center;
+        color: #738a94;
+        padding: 0.75em 3em 1.25em;
+    }
+
+    .post-content blockquote.kg-blockquote-alt::before {
+        display: none;
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #15171a;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 3px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-toggle-card-icon {
+        display: none;
+    }
+
+    .kg-toggle-content {
+        margin-top: 0.8rem;
+    }
+
+    .kg-product-card-container {
+        background: transparent;
+        padding: 20px;
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: inset 0 0 0 1px rgb(124 139 154 / 25%);
+    }
+
+    .kg-product-card-description p {
+        margin-top: 1.5em;
+    }
+
+    .kg-product-card-description ul {
+        margin-left: 24px;
+    }
+
+    .kg-product-card-title {
+        font-size: 1.9rem;
+        font-weight: 700;
+    }
+
+    .kg-product-card-rating-star {
+        height: 28px;
+        width: 20px;
+        margin-right: 2px;
+    }
+
+    .kg-product-card-rating-star svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    opacity: 0.15;
+    }
+
+    .kg-product-card-rating-active.kg-product-card-rating-star svg {
+    opacity: 1;
+    }
+
+    .kg-nft-card-container {
+        position: relative;
+        display: flex;
+        flex: auto;
+        flex-direction: column;
+        text-decoration: none;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.4rem;
+        font-weight: 400;
+        box-shadow: 0 2px 6px -2px rgb(0 0 0 / 10%), 0 0 1px rgb(0 0 0 / 40%);
+        width: 100%;
+        max-width: 512px;
+        color: #15212A;
+        background: #fff;
+        border-radius: 5px;
+        transition: none;
+        margin: 0 auto;
+    }
+
+    .kg-nft-metadata {
+        padding: 2.0rem;
+    }
+
+    .kg-nft-image-container {
+        position: relative;
+    }
+
+    .kg-nft-image {
+        display: flex;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .kg-nft-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .kg-nft-header h4.kg-nft-title {
+        font-size: 1.9rem;
+        font-weight: 700;
+        margin: 0;
+        color: #15212A;
+    }
+
+    .kg-nft-header amp-img {
+        max-width: 114px;
+        max-height: 26px;
+    }
+
+    .kg-nft-opensea-logo {
+        margin-top: 2px;
+        width: 100px;
+    }
+
+    .kg-nft-creator {
+        font-family: inherit;
+        color: #95A1AD;
+    }
+
+    .kg-nft-creator span {
+        font-weight: 500;
+        color: #15212A;
+    }
+
+    .kg-nft-card p.kg-nft-description {
+        font-size: 1.4rem;
+        line-height: 1.4em;
+        margin: 2.0rem 0 0;
+        color: #222;
+    }
+
+    .kg-button-card {
+        display: flex;
+        position: static;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .kg-btn {
+        display: flex;
+        position: static;
+        align-items: center;
+        padding: 0 2.0rem;
+        height: 4.0rem;
+        line-height: 4.0rem;
+        font-size: 1.65rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .kg-btn:hover {
+        opacity: 0.85;
+    }
+
+    .kg-btn-accent {
+        background-color: var(--ghost-accent-color, #1292EE);
+        color: #fff;
+    }
+
+    .kg-callout-card {
+        display: flex;
+        padding: 20px 28px;
+        border-radius: 3px;
+    }
+
+    .kg-callout-card-grey {
+        background: rgba(124, 139, 154, 0.13);
+    }
+
+    .kg-callout-card-white {
+        background: transparent;
+        box-shadow: inset 0 0 0 1px rgba(124, 139, 154, 0.25);
+    }
+
+    .kg-callout-card-blue {
+        background: rgba(33, 172, 232, 0.12);
+    }
+
+    .kg-callout-card-green {
+        background: rgba(52, 183, 67, 0.12);
+    }
+
+    .kg-callout-card-yellow {
+        background: rgba(240, 165, 15, 0.13);
+    }
+
+    .kg-callout-card-red {
+        background: rgba(209, 46, 46, 0.11);
+    }
+
+    .kg-callout-card-pink {
+        background: rgba(225, 71, 174, 0.11);
+    }
+
+    .kg-callout-card-purple {
+        background: rgba(135, 85, 236, 0.12);
+    }
+
+    .kg-callout-card-accent {
+        background: var(--ghost-accent-color);
+        color: #fff;
+    }
+
+    .kg-callout-card-accent a {
+        color: #fff;
+    }
+
+    .kg-callout-emoji {
+        padding-right: 16px;
+        line-height: 1.3;
+        font-size: 1.25em;
+    }
+
+    .kg-header-card {
+        padding: 6em 3em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .kg-header-card.kg-size-small {
+        padding-top: 4em;
+        padding-bottom: 4em;
+    }
+
+    .kg-header-card.kg-size-large {
+        padding-top: 12em;
+        padding-bottom: 12em;
+    }
+
+    .kg-header-card.kg-width-full {
+        padding-left: 4em;
+        padding-right: 4em;
+    }
+
+    .kg-header-card.kg-align-left {
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .kg-header-card.kg-style-dark {
+        background: #15171a;
+        color: #ffffff;
+    }
+
+    .kg-header-card.kg-style-light {
+        color: #15171a;
+        border: 1px solid rgba(124, 139, 154, 0.25);
+        border-width: 1px 0;
+    }
+
+    .kg-header-card.kg-style-accent {
+        background-color: var(--ghost-accent-color);
+    }
+
+    .kg-header-card.kg-style-image {
+        background-color: #e7e7eb;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .kg-header-card h2 {
+        font-size: 4em;
+        font-weight: 700;
+        line-height: 1.1em;
+        margin: 0;
+    }
+
+    .kg-header-card h2 strong {
+        font-weight: 800;
+    }
+
+    .kg-header-card.kg-size-small h2 {
+        font-size: 3em;
+    }
+
+    .kg-header-card.kg-size-large h2 {
+        font-size: 5em;
+    }
+
+    .kg-header-card h3 {
+        font-size: 1.25em;
+        font-weight: 500;
+        line-height: 1.3em;
+        margin: 0;
+    }
+
+    .kg-header-card h3 strong {
+        font-weight: 600;
+    }
+
+    .kg-header-card.kg-size-small h3 {
+        font-size: 1em;
+    }
+
+    .kg-header-card.kg-size-large h3 {
+        font-size: 1.5em;
+    }
+
+    .kg-header-card:not(.kg-style-light) h2,
+    .kg-header-card:not(.kg-style-light) h3 {
+        color: #ffffff;
+    }
+
+    .kg-header-card a.kg-header-card-button {
+        display: flex;
+        position: static;
+        align-items: center;
+        padding: 0 1.2em;
+        height: 2.4em;
+        line-height: 1em;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-size: 0.95em;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: opacity 0.2s ease-in-out;
+        background-color: var(--ghost-accent-color);
+        color: #ffffff;
+        margin: 1.75em 0 0;
+    }
+
+    .kg-header-card a.kg-header-card-button:hover {
+        opacity: 0.85;
+    }
+
+    .kg-header-card.kg-size-large a.kg-header-card-button {
+        margin-top: 2em;
+    }
+
+    .kg-header-card.kg-size-small a.kg-header-card-button {
+        margin-top: 1.5em;
+    }
+
+    .kg-header-card.kg-style-image a.kg-header-card-button,
+    .kg-header-card.kg-style-dark a.kg-header-card-button {
+        background: #ffffff;
+        color: #15171a;
+    }
+
+    .kg-header-card.kg-style-accent a.kg-header-card-button {
+        background: #ffffff;
+        color: var(--ghost-accent-color);
+    }
+
+    .kg-audio-card {
+        display: flex;
+        width: 100%;
+        box-shadow: inset 0 0 0 1px rgba(124, 139, 154, 0.25);
+    }
+
+    .kg-audio-thumbnail {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80px;
+        min-width: 80px;
+        height: 80px;
+        background: transparent;
+        object-fit: cover;
+        aspect-ratio: 1/1;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .kg-audio-thumbnail.placeholder {
+        background: var(--ghost-accent-color);
+    }
+
+    .kg-audio-thumbnail.placeholder svg {
+        width: 24px;
+        height: 24px;
+        fill: white;
+    }
+
+    .kg-audio-player-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        --seek-before-width: 0%;
+        --volume-before-width: 100%;
+        --buffered-width: 0%;
+    }
+
+    .kg-audio-title {
+        width: 100%;
+        padding: 8px 12px 0;
+        border: none;
+        font-family: inherit;
+        font-size: 1.1em;
+        font-weight: 700;
+        background: transparent;
+    }
+
+    .kg-audio-player {
+        display: none;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+
+    :root {--ghost-accent-color: #20418c;}
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+</head>
+
+<body class="amp-template">
+    <header class="page-header">
+        <a href="adrenalan.github.io">
+                <amp-img class="site-icon" src="adrenalan.github.io/content/images/2022/08/Adrenalan-Fav-60px.png" width="50" height="50" layout="fixed" alt="Adrenalan"></amp-img>
+        </a>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">SIEM – How to go from concept to incident ready</h1>
+                <section class="post-meta">
+                    Mark Thompson -
+                    <time class="post-date" datetime="2018-09-11">11 Sep 2018</time>
+                </section>
+            </header>
+            <figure class="post-image">
+                <amp-img src="adrenalan.github.io/content/images/2022/08/1-top-of-page.jpg" width="600" height="340" layout="responsive" 
+                alt="SIEM – How to go from concept to incident ready"
+                ></amp-img>
+            </figure>
+            <section class="post-content">
+
+                <p>So, you have decided your organisation needs a SIEM. What happens next?</p><p>As a consolidated view of security threats, a SIEM can be of great value to almost any organisation. However, a lot of organisations don’t get sufficient value from their SIEM, or it’s just a way for them to tick a box on a compliance form. Don’t you really want to get the most out of that expensive new tool?</p><p>Once deployed, a lot of organisations think the job is done, but this couldn’t be further from the truth. The SIEM will require constant and ongoing maintenance and improvements to continue to provide value. Otherwise it risks falling into disrepair and might become an even larger task to fix than the original deployment. I have seen organisations where it is easier to install a new SIEM rather than fix up the old one!</p><h2 id="what-are-the-first-things-to-consider">What are the first things to consider?</h2><p><br />The first thing to consider is why the decision to use a SIEM has been made. Ensure that the business requirements are known and what goals the organisation wishes to achieve by embarking on the SIEM journey. Begin with the end in mind. Ensure that the goals of the project are aligned with the original business requirements.</p><figure class="kg-card kg-image-card"><amp-img src="adrenalan.github.io/content/images/2022/08/2-what-are-the-first-things-to-consider.jpg" class="kg-image" alt width="640" height="480" srcset="adrenalan.github.io/content/images/size/w600/2022/08/2-what-are-the-first-things-to-consider.jpg 600w, adrenalan.github.io/content/images/2022/08/2-what-are-the-first-things-to-consider.jpg 640w" layout="responsive"></amp-img></figure><p>Take some time to consider the best product for your needs. SIEM solutions come in many flavours. There are open source products, a multitude of vendors that offer SIEMs, or even home-grown options if you have the skills and desire in house to do this. Be careful with the home-grown option however due to increased time to value.</p><p>Review the various hosting options for your selected SIEM. Do you want to host the SIEM in-house, or does your organisation have a cloud first strategy, in which it is a requirement to use a fully hosted option?</p><p>If you have settled on a SIEM product that you will be purchasing from a vendor, review the licensing model in use, as a lot of work will go into ensuring that you have the right type, and number, of licenses for your organisation. Licensing can be complex and expensive, depending on the licensing model for the SIEM selected. Right sizing the license is important, but this can be expanded later on, providing there is budget remaining. You will need to consider your logging requirements at this stage as well since most licensing schemes work by number or size of logs being imported. I’ll talk more about determining logging requirements later on.</p><p>Remember to consider also the ongoing support and maintenance costs, as the higher the license cost, the higher the annual renewal bill that comes with it.</p><p>Review the architecture options available for your implementation. If you are hosting the SIEM in house then this will be very important, as it can mean the difference between a poorly performing SIEM and an incident ready SIEM at the end of the day. This is easier if you have decided on a cloud implementation, as less thought needs to go into the SIEM itself and more into ensuring secure, reliable and timely data transmission to the SIEM. There are many decisions to be made here and most likely the vendor you have selected will be able to offer you the best advice for your specific needs.</p><h2 id="which-logs-do-i-need">Which logs do I need?</h2><p>Now that some of the decisions have already been made around the SIEM, its important to start thinking about what the logging requirements are. As any technology professional knows, there are a huge abundance of logs available in any organisation. Do you want all of them? I’d suggest not, or at the very least take a prioritised approach to adding logs to your SIEM. Onboarding everything in one hit is just asking for trouble.</p><figure class="kg-card kg-image-card"><amp-img src="adrenalan.github.io/content/images/2022/08/3-what-logs-do-i-need.jpg" class="kg-image" alt width="640" height="500" srcset="adrenalan.github.io/content/images/size/w600/2022/08/3-what-logs-do-i-need.jpg 600w, adrenalan.github.io/content/images/2022/08/3-what-logs-do-i-need.jpg 640w" layout="responsive"></amp-img></figure><p>Firstly, decide on some use cases for your SIEM. Use cases can help to prioritise which logs are going to provide you with the most value. Start with thinking about some likely attack scenarios for your organisation, from both internal and external threat actors. Then try to determine how you would detect these events, and which logs are going to be able to help you the most.</p><p>The other approach which goes hand in hand with the above is to rate servers or applications by risk, i.e. figure out which assets would be of the most value to attackers and start by collecting logs for your most critical assets.</p><p>By now you will have a pretty good idea of the order in which you want to start importing logs. Some others to think about are:</p><p>• Active Directory, Kerberos, LDAP<br />• Identity management and authentication data<br />• IDS/IPS, Web/Email filters, WAF, Anti-Virus, Anti-Malware<br />• DNS, DHCP, switch, router, firewall<br />• Database (be sure to configure auditing in the databases, as most are not enabled by default)<br />• Network flow data<br />• Cloud data<br />• Physical building security logs (e.g. door access)<br />• Vulnerability scanners<br />• System or policy change data</p><h2 id="other-things-to-think-about-before-installation"><br />Other things to think about before installation</h2><p>Make sure you consider who is going to have access to your brand new SIEM. Once the SIEM is running you might find a lot of people within the organisation want access. You need to decide up front what makes sense, and what doesn’t. For example, operations teams might want to investigate locked accounts using the SIEM, especially if they don’t have their own logging solution in place for authentication logs.</p><figure class="kg-card kg-image-card"><amp-img src="adrenalan.github.io/content/images/2022/08/4-other-things-to-think-about-before-installation.jpg" class="kg-image" alt width="639" height="426" srcset="adrenalan.github.io/content/images/size/w600/2022/08/4-other-things-to-think-about-before-installation.jpg 600w, adrenalan.github.io/content/images/2022/08/4-other-things-to-think-about-before-installation.jpg 639w" layout="responsive"></amp-img></figure><p>Ensure you have a plan for the permissions scheme you want to use. If you are going to have various teams other than the Security Team accessing your SIEM, you will want to have the appropriate permissions structure in place as to not allow access to data by team that don’t need it. You may not want your Operations team having access to the web browsing data for the entire organisation for example.</p><p>Also think about who is going to be responsible for the ongoing maintenance of the SIEM. Are the security staff who the primary users of the SIEM, also the ones that are going to be required to maintain it, and log support calls to the vendor when something goes wrong? Document these support requirements up-front so that when something goes wrong, you don’t have to start conversations about who is going to get it resolved.</p><p>This is also the time when you want to start thinking about which sources of threat intelligence are going to bring you the most value. There are plenty of free ones out there, and many paid ones exist as well. Something industry specific, if it is available, will likely bring you the most value. Do a web search for “threat intelligence feeds” if you aren’t sure where to start. But beware, some threat intel feeds will fire more alerts than you know what to do with, so significant tuning may be required.</p><h2 id="purchasing-and-installation">Purchasing and Installation</h2><p><br />At this stage (or possibly even slightly earlier), you can start the procurement process for the required hardware, software and licenses. Make sure you contact multiple vendors to ensure you are getting the best deal on the SIEM that you want.</p><figure class="kg-card kg-image-card"><amp-img src="adrenalan.github.io/content/images/2022/08/5-purchasing-and-installation.jpg" class="kg-image" alt width="638" height="494" srcset="adrenalan.github.io/content/images/size/w600/2022/08/5-purchasing-and-installation.jpg 600w, adrenalan.github.io/content/images/2022/08/5-purchasing-and-installation.jpg 638w" layout="responsive"></amp-img></figure><p>OK, its crunch time. The hosting model is decided, maybe hardware has been purchased, software is ready to go, and licensing is all sorted. Time to get the thing up and running! Set up the hardware and software, or don’t if you have selected a cloud model. The point is to make sure the SIEM is ready to start accepting logs.</p><p>Now you can start working through your prioritised log source lists and start adding them one by one, or in batches if your workflow allows for this. Make sure you watch the performance of your SIEM during this time, as this is where architecture and planning issues can start to show themselves.</p><h2 id="the-never-ending-cycle-of-siem">The Never-Ending Cycle of SIEM</h2><p><br />Now comes the fun part, the operationalisation of continuous SIEM improvement. The following steps are not things that need to be done just once, as much as you might wish it were that way. For a SIEM to be truly effective there needs to be an ongoing cycle of evaluation and refinement.</p><p>Continuously evaluate required log sources. Log sources change all the time. New systems are added, old systems are decommissioned, log sizes grow and diminish, and sometimes just stop working altogether. Ensure that you are on the lookout for any of these events, so that the SIEM has the right log sources needed to achieve your goals.</p><p>Evaluate threat intelligence. Are you getting value from your threat intel sources? Are there some new sources of threat intel that may potentially be useful? The other thing to consider here is if you are able to contribute your own threat intelligence to help others, although this does require a certain level of maturity within your operations that you won’t have straight away.</p><p>Review your use cases on a regular basis. Are there some new ones based on new products the organisation is offering, or is the evolving threat landscape showing up new and different types of threats than in the past. Keeping on top of new use cases will help your SIEM continue to perform and meet business objectives.</p><p>Now for one of the most important tasks, without which, your SIEM will be much more difficult and onerous to operate. Write, evaluate, and tune the rules. A lot (if not all) of SIEMs come with out of the box rules you can use, which may or may not be suitable for your organisation. Apply the use cases that you have generated to ensure you have rules for each and every one of them.</p><p>This next task goes hand in hand with writing rules. Watch for and tune false positives constantly. If there has been an alert generated, and it is proven to be a false positive, then that rule should be tuned, so that you’re not spending time on the same false positives more than once.</p><p>Performance monitoring and ensuring SIEM is performing up to scratch. In order to maintain your SIEM in a good state of health, it is important to perform preventative maintenance checks on a regular basis. As above, display metrics regarding the health of your SIEM on a dashboard. Ensure that the team who is responsible for the maintenance of the SIEM can see these dashboards, and receive the required alerts to provide a quick response when something goes wrong.</p><p>Develop meaningful dashboards. Dashboards are of critical importance to any well-functioning SIEM. They can display near real time status of the operational health of the SIEM, as well as important information about the security posture and compliance level of the organisation.</p><figure class="kg-card kg-image-card"><amp-img src="adrenalan.github.io/content/images/2022/08/6-dashboards.jpg" class="kg-image" alt width="639" height="425" srcset="adrenalan.github.io/content/images/size/w600/2022/08/6-dashboards.jpg 600w, adrenalan.github.io/content/images/2022/08/6-dashboards.jpg 639w" layout="responsive"></amp-img></figure><p>Try and automate as much as possible. If you are performing a task manually every time a specific alert comes in, can that task be automated or scripted in some way to reduce the workload on your analysts?</p><p>Now it’s time to perform a review. Have you met your original goals and aligned with the business requirements?</p><p>Using the above continuous improvement cycle will allow your SIEM to be ready when the inevitable security incident arrives. Your SIEM will allow your incident response process to operate efficiently and effectively when the time comes. Ensure that your incident response processes are reflected in your SIEM processes and vice versa, and review these on a regular basis as well.</p><h2 id="ready-for-a-security-incident">Ready for a Security Incident?</h2><p><br />There is a lot to think about during the implementation of a SIEM, and many mistakes that can be made along the way. Hopefully this article has given you something to think about when it comes to your next SIEM implementation.</p><p>Is there anything that you think I have missed? Let me know in the comments. Good luck with your SIEM implementation!</p>
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="page-footer">
+            <amp-img class="site-icon" src="adrenalan.github.io/content/images/2022/08/Adrenalan-Fav-60px.png" width="50" height="50" layout="fixed" alt="Adrenalan"></amp-img>
+        <h3>Adrenalan</h3>
+            <p>Information, Identity, Intent</p>
+        <p><a href="adrenalan.github.io">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a>
+    </footer>
+    
+</body>
+</html>
